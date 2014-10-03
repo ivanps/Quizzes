@@ -1,0 +1,16 @@
+- Class: meta
+  Course: Quizzes
+  Lesson: R Basics
+  Author: Dr. Ivan Pacheco
+  Type: Standard
+  Organization: Tec de Monterrey Campus Zacatecas
+  Version: 2.2.16
+
+- Class: text
+  Output: This activity will test your knowledge of R programming language.
+
+- Class: cmd_question
+  Output: Assign your name (only your first name) to a character variable called name.
+  CorrectAnswer: name <- "your_name"
+  AnswerTests: check_var_is()
+
