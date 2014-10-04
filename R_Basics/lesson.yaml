@@ -7,10 +7,134 @@
   Version: 2.2.16
 
 - Class: text
-  Output: This activity will test your knowledge of R programming language.
+  Output: This activity will test and grade your knowledge of R programming language. You can take this test as many times as you want. Save the grade and your coded grade for each trial, and you can report it at the end your best result. Let's start!!!
 
 - Class: cmd_question
-  Output: Assign your name (only your first name) to a character variable called name.
+  Output: Assign your name (only your first name) to a character variable called name. Don't make up another name, because I will use to compare it with your student id.
   CorrectAnswer: name <- "your_name"
   AnswerTests: check_var_is()
 
+- Class: cmd_question
+  Output: Divide a vector that contains 21, 34 and 73 by another vector that contains 2, 5 and 128. Assign the result to a vector z. Need to write command in one line only.
+  CorrectAnswer: z <- c(21,34,73)/c(2,5,128)
+  AnswerTests: check_omnitest(correctExpr='z <- c(21,34,73)/c(2,5,128)')
+
+- Class: mult_question
+  Output: An example of 'recycling' is adding the vecotrs c(1, 2, 3, 4) and c(0, 10). What is the result?
+  CorrectAnswer: a vector of length 4
+  AnswerChoices: a vector of length 4; a single number (i.e a vector of length 1);
+    a vector of length 2
+  AnswerTests: check_omnitest(correctVal='a vector of length 4')
+
+- Class: cmd_question
+  Output: Construct a sequence of 30 numbers between 50 and 100 by using the function "seq" with the option "length". Store the result in a new variable called my_seq.
+  CorrectAnswer: my_seq <- seq(50, 100, length=30)
+  AnswerTests: check_omnitest(correctExpr='my_seq <- seq(50, 100, length=30)')
+
+- Class: cmd_question
+  Output: Get a vector that contains 10 repetitions of the vector (0, 1, 2). Use the function "rep"" with option "times".
+  CorrectAnswer: rep(c(0, 1, 2), times = 10)
+  AnswerTests: check_omnitest(correctExpr='rep(c(0, 1, 2), times = 10)')
+
+- Class: mult_question
+  Output: ((111 >= 111) | !(TRUE)) & ((4 + 1) == 5)
+  CorrectAnswer: 'TRUE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: check_omnitest(correctVal='TRUE')
+
+- Class: cmd_question
+  Output: Vector recycling! Use la "paste" function to generate the character vector "X1" "X2" "X3". Don't assign to result to a variable.
+  CorrectAnswer: paste("X", 1:3, sep = "")
+  AnswerTests: check_omnitest(correctExpr='paste("X", 1:3, sep = "")')
+
+- Class: cmd_question
+  Output: Consider the vectors c(1/0, 2+NA, 0/0, 10). Call is.na() on the vector and assign the result to my_na.
+  CorrectAnswer: my_na <- is.na(c(1/0, 2+NA, 0/0, 10))
+  AnswerTests: check_omnitest(correctExpr='my_na <- is.na(c(1/0, 2+NA, 0/0, 10))')
+
+- Class: cmd_question
+  Output: Use the function "sum" to count the number of NAs in the vector c(1/0, 2+NA, 0/0, 10).
+  CorrectAnswer: sum(is.na(c(1/0, 2+NA, 0/0, 10)))
+  AnswerTests: check_omnitest(correctExpr='sum(is.na(c(1/0, 2+NA, 0/0, 10)))')
+
+- Class: cmd_question
+  Output: A binomial random variable represents the number of 'successes' (heads) in a given number of independent 'trials' (coin flips). Consider an experiment where we flip an unfair coin 100 times with a 0.7 probability of falling head. We can simulate an outcome of this experiment by using rbinom(1, size = 100, prob = 0.7). Use this function to simulate this experiment 45 times. Assign the result to the variable x.
+  CorrectAnswer: x <- rbinom(45, size = 100, prob = 0.7)
+  AnswerTests: check_omnitest('x <- rbinom(45, size = 100, prob = 0.7)')
+
+- Class: cmd_question
+  Output: View the first ten elements of x.
+  CorrectAnswer: x[1:10]
+  AnswerTests: check_omnitest(correctExpr='x[1:10]')
+
+- Class: cmd_question
+  Output: View the elements of x that are greater than 70.
+  CorrectAnswer: x[x > 70]
+  AnswerTests: omnitest(correctExpr='x[x > 70]')
+
+- Class: mult_question
+  Output: Now, review the matter of subsetting a vector by named elements. Suppose that you define the vector vect <- c(foo = 11, bar = 2, norf = NA). Which of the following commands do you think would give us the second element of vect?
+  AnswerChoices: vect["bar"]; vect[bar]; vect["2"]
+  CorrectAnswer: vect["bar"]
+  AnswerTests: check_omnitest(correctVal='vect["bar"]')
+
+- Class: cmd_question
+  Output: Create a matrix from a vector c(5,82.4,4,91.7,5,88.5) and dimensions (3 rows, 2 columns) by calling the matrix() function. Assign the result to my_matrix
+  CorrectAnswer: my_matrix <- matrix(c(5,82.4,4,91.7,5,88.5), nrow=3, ncol=2)
+  AnswerTests: check_omnitest('my_matrix <- matrix(c(5,82.4,4,91.7,5,88.5), nrow=3, ncol=2)')
+
+- Class: cmd_question
+  Output: Construct a data frame where the first entry of the function is the vector c("Miguel", "Susana", "Felipe") and the second entry is my_matrix. Assign the name my_df to this data frame.
+  CorrectAnswer: my_df <- data.frame(c("Miguel", "Susana", "Felipe"), my_matrix)
+  AnswerTests: check_omnitest(correctExpr='my_df <- data.frame(c("Miguel", "Susana", "Felipe"), my_matrix)')
+
+- Class: cmd_question
+  Output: Now, use the colnames() function to set the `colnames` attribute for our data frame my_df. The first column refers to "Student name", second column to "Semester" and the third column to "Grade".
+  CorrectAnswer: colnames(my_df) <- c("Student name", "Semester", "Grade")
+  AnswerTests: check_omnitest(correctExpr='colnames(my_df) <- c("Student name", "Semester", "Grade")')
+
+- Class: cmd_question
+  Output: I've stored a dataset in a variable called flags. Use the funtion "head" to preview the first six lines (i.e. the 'head') of the dataset.
+  CorrectAnswer: head(flags)
+  AnswerTests: check_omnitest(correctExpr='head(flags)')
+
+- Class: cmd_question
+  Output: To get a list containing the sum of each column of the flag colors flags[, 11:17], call the lapply() function with two arguments. The first argument is the object over which we are looping and the second argument is the name of the function we wish to apply to each column (i.e. sum). Remember that the second argument is just the name of the function with no parentheses, etc.
+  CorrectAnswer: lapply(flags[, 11:17], sum)
+  AnswerTests: check_omnitest(correctExpr='lapply(flags[, 11:17], sum)')
+
+- Class: cmd_question
+  Output: As you study, the unique() function returns a vector of the unique values contained in the object passed to it. Therefore, apply sapply to return a list containing one vector of unique values for each column of the flags dataset.
+  CorrectAnswer: sapply(flags, unique)
+  AnswerTests: check_omnitest(correctExpr='sapply(flags, unique)')
+
+- Class: cmd_question
+  Output: Use "vapply"" to return a character vector containing the "class"" of each column in the dataset flags. Remmember that 'character(1)' argument tells R that we expect the class function to return a character vector of length 1 when applied to EACH column of the flags dataset.
+  CorrectAnswer: vapply(flags, class, character(1))
+  AnswerTests: check_omnitest(correctExpr="vapply(flags, class, character(1))")
+
+- Class: cmd_question
+  Output: If you take the arithmetic mean of a bunch of 0s and 1s, you get the proportion of 1s. Use "tapply"" to apply the "mean"" function to the 'animate' variable separately for each of the six 'landmass' groups, thus giving us the proportion of flags containing an animate image WITHIN each landmass group.
+  CorrectAnswer: tapply(flags$animate, flags$landmass, mean)
+  AnswerTests: check_omnitest(correctExpr="tapply(flags$animate, flags$landmass, mean)")
+  Hint: To access the values of the variables use flags$animate and flags$landmass.
+
+- Class: cmd_question
+  Output: Find the number of rows of the data frame flags.
+  CorrectAnswer: nrow(flags)
+  AnswerTests: check_omnitest(correctExpr='nrow(flags)')
+
+- Class: cmd_question
+  Output: Perhaps the most useful and concise function for understanding the *str*ucture of your data is str(). Get the structure of the data frame flags.
+  CorrectAnswer: str(flags)
+  AnswerTests: check_omnitest(correctExpr='str(flags)')
+
+- Class: cmd_question
+  Output: Let's simulate rolling four six-sided dice. Don't forget to assign the value TRUE to the option 'replace'.
+  CorrectAnswer: sample(1:6, 4, replace = TRUE)
+  AnswerTests: check_omnitest('sample(1:6, 4, replace = TRUE)')
+
+- Class: cmd_question
+  Output: Generate 10 random numbers from a normal distribution with a mean of 100 and a standard deviation of 25.
+  CorrectAnswer: rnorm(10, 100, 25)
+  AnswerTests: check_omnitest('rnorm(10, 100, 25)')
