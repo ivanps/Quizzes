@@ -6,9 +6,8 @@
 rm(list=ls())
 suppressMessages(library(RCurl))
 
-NPREG <- 25
+NPREG <- 12
 cal <- 0
-sid <- ""
 qpts <- 100/NPREG
 
 # Path to installed lesson

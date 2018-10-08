@@ -26,11 +26,13 @@ check_omnitest <- function(correctExpr=NULL, correctVal=NULL, strict=FALSE) {
     }  
     
     if (!rflag) {
-        swirl_out("Sorry, now question is worth ",qpts*(.9)^(e$attempts-1)," points. \n")
+        swirl_out("Sorry, that was not quite correct. Now question is worth ",
+                  qpts*(.8)^(e$attempts-1)," points. \n")
     } else {
-        swirl_out("Got ",qpts*(.9)^(e$attempts-2)," in this question.\n")
+        swirl_out("You got ",qpts*(.8)^(e$attempts-2),"points out of ",
+              qpts, "possible points.\n")
         sid <<- eval(e$expr)
-        cal <<- cal + qpts*(.9)^(e$attempts-2)
+        cal <<- cal + qpts*(.8)^(e$attempts-2)
         if (e$row == NPREG+1) {
             report_calif(round(cal, digits=2))
         }     
@@ -40,7 +42,7 @@ check_omnitest <- function(correctExpr=NULL, correctVal=NULL, strict=FALSE) {
 
 check_var_is <- function(ans) {
     e <- get('e', parent.frame())
-    rflag <- var_is_a('character','name')
+    rflag <- var_is_a('character','matr')
     
     if (!is.null(e$skips)) {
         swirl_out("***Test won't count because you skipped a question.***")
@@ -48,11 +50,13 @@ check_var_is <- function(ans) {
     }
 
     if (!rflag) {
-        swirl_out("Sorry, now question is worth ",qpts*(.9)^(e$attempts-1)," points. \n")
+        swirl_out("Sorry, that was not quite correct. Now question is worth ",
+                qpts*(.8)^(e$attempts-1)," points. \n")
     } else {
-        swirl_out("Got ",qpts*(.9)^(e$attempts-2)," in this question.\n")
+        swirl_out("You got ",qpts*(.8)^(e$attempts-2),"points out of ",
+                qpts, "possible points.\n")
         sid <<- eval(e$expr)
-        cal <<- cal + qpts*(.9)^(e$attempts-2)      
+        cal <<- cal + qpts*(.8)^(e$attempts-2)      
         if (e$row == NPREG+1) {
             report_calif(round(cal, digits=2))
         }     
@@ -64,13 +68,10 @@ report_calif <- function(calificacion) {
     u <- as.integer(runif(1, min=0, max=100))
     cat("\n\n\nTEST RESULTS \n")
     cat("Grade: ", calificacion, "\n")
-    cat("Coded grade: ", base64(paste(name,calificacion,u,sep="-"))[[1]], "\n\n")
-    readline("...")
-    cat("If you want to report your grade, open your browser and go \n")
-    cat("to the following link and report to grade. \n")
-    cat("https://docs.google.com/a/itesm.mx/forms/d/1CTLG2eVqOUjurzsb5GxOefb5gXvXTa1twMK8HYgFENY/viewform")
-    cat("\n\n\n")
-    readline("...")
-    cat("Don't forget that you can take the test again, but you have\n")
-    cat("to send your grade at the end, before the deadline.\n\n\n")
+    code_sid_name <- base64(paste(matr, calificacion, u, sep=","))[[1]]
+    cat("Coded grade (and info): ", code_sid_name, "\n\n")
+    pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSfaXU8_jPwWcxfK43yfUdKgAy2cCz9Zzp03-lhJhIWpp5j3vg/viewform?usp=pp_url&entry.1798593314="
+    pre_fill_link <- paste0(pre_fill_link, code_sid_name)
+    sel <- menu(c("Yes", "No"), title="Do you want to report this grade to your instructor?")
+    if (sel == 1) browseURL(pre_fill_link)
 }
